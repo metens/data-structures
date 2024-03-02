@@ -15,6 +15,10 @@ class lll {
 		void print(node* head); // pass by value bc we aren't changing the list
 		void print_in_reverse(node* head);
 		int delete_list(node* &head); // deletes all nodes in the list
+
+		int count_items(node* head);
+		int sum_list(node* head);
+
 	public:
 		// These are public wrapper functions that call the private methods:
 		lll() : head (nullptr) {} // default constructor setting head = nullptr
@@ -22,6 +26,9 @@ class lll {
 		int add_at_end(int data_to_add); // wrapper function
 		void print(); // wrapper for print
 		void print_in_reverse(); // wrapper for print_in_reverse
+
+		int count_items();
+		int sum_list();
 };
 
 lll::~lll() {
@@ -63,4 +70,16 @@ void lll::print_in_reverse(node* head) {
 	print_in_reverse(head -> next);
 	std::cout << head -> data << " ";
 	return;
+}
+
+int lll::count_items() { return count_items(head); }
+int lll::count_items(node* head) {
+	if (head == nullptr) {return 0; } // no more nodes in the list
+	return count_items(head -> next) + 1; // add one until we reach the end of the list
+}
+
+int lll::sum_list() { return sum_list(head); }
+int lll::sum_list(node* head) { 
+	if (head == nullptr) return 0; // either no list, or reached the end
+	return sum_list(head->next) + head -> data; // adding each node's data
 }
