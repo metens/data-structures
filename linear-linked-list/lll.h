@@ -9,7 +9,7 @@
 class lll {
 	private:
 		node* head;
-		
+
 		// These are the functions that deal with the private data:
 		int add_at_end(node* &head, int data_to_add);
 		void print(node* head); // pass by value bc we aren't changing the list
@@ -18,6 +18,7 @@ class lll {
 
 		int count_items(node* head);
 		int sum_list(node* head);
+		int order_list(node* &head); // order list from smallest to largest
 
 	public:
 		// These are public wrapper functions that call the private methods:
@@ -29,6 +30,7 @@ class lll {
 
 		int count_items();
 		int sum_list();
+		int order_list(); // wrapper function
 };
 
 lll::~lll() {
@@ -82,4 +84,24 @@ int lll::sum_list() { return sum_list(head); }
 int lll::sum_list(node* head) { 
 	if (head == nullptr) return 0; // either no list, or reached the end
 	return sum_list(head->next) + head -> data; // adding each node's data
+}
+
+int lll::order_list() { // wrapper function
+	int count = count_items(head);
+	for (int i=0; i < count; i++) { // for every item in the list, the list is ordered
+		order_list(head);
+	}
+	return 1;
+}
+int lll::order_list(node* &head) {
+	if (head == nullptr) return 0; // no list, no swaps
+	if (head -> next == nullptr) return 0; 
+	if ((head -> data) > (head -> next -> data)) { // the current node is bigger than the next
+		node* temp = head -> next; // hold on to the next node (the one with a bigger int)
+	// perform a swapping of nodes as in bubble sort
+		head-> next = temp -> next; 
+		temp -> next = head;
+		head = temp;
+	}	
+	return order_list(head -> next);
 }

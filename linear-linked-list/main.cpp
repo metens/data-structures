@@ -7,13 +7,13 @@ int main() {
 	lll list;	// Create an object of the lll class called "list"
 
 	// Make the list
-	list.add_at_end(10);
-	list.add_at_end(20);
-	list.add_at_end(50);
-	list.add_at_end(80);
-	list.add_at_end(95);
-	list.add_at_end(100);
-	list.add_at_end(15);
+	list.add_at_end(5);
+	list.add_at_end(3);
+	list.add_at_end(7);
+	list.add_at_end(4);
+	list.add_at_end(1);
+	list.add_at_end(6);
+	list.add_at_end(5);
 
 	// Print it forwards
 	list.print();
@@ -31,7 +31,11 @@ int main() {
 	
 	// Summing the list
 	int sum = list.sum_list();
-	std::cout << "The sum of the list is:  " << sum;
+	std::cout << "The sum of the list is:  " << sum << "\n";
+
+	// Order the list
+	list.order_list();
+	list.print();
 	
 	std::cout << "\n";
 	
