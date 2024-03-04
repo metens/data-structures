@@ -10,7 +10,7 @@ arrays of linked lists, linked lists of arrays**, and much more.
 So far I am starting at linear linked lists. Here is a task list
 that I plan to move through in the next month:
 
-- [ ] linear linked lists
+- [X] linear linked lists
 - [ ] doubly linked lists
 - [ ] circular linked lists
 - [ ] binary search trees
