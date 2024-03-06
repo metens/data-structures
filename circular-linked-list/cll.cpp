@@ -40,6 +40,60 @@ class cll {
 			return 1;
 		}
 
+		int removeNode(int data_to_remove) {
+			// Case 1) No list:
+			if (list_ptr == nullptr) return 0;
+			// Case 2) There is only one node and it holds the data:
+			if (list_ptr->next == list_ptr && list_ptr->data == data_to_remove) {
+				delete list_ptr;
+				list_ptr = nullptr;
+				return 1;
+			}
+			// Case 3) The node to remove is at the list_ptr and there are more nodes in the list. We need to traverse the list in order to delete it since there is no previous pointer
+			if (list_ptr->data == data_to_remove) {
+				node* curr = list_ptr->next;
+				// Must traverse the list to delete the node	
+				while (curr->next != list_ptr) {
+					curr = curr->next;	
+				}
+				// curr->next == list_ptr so we can safely delete list_ptr:
+				curr->next = list_ptr->next;
+				delete list_ptr;
+				list_ptr = curr;
+				return 1;
+			}
+			// Case 4) The node to remove is the one after the list_ptr
+			if (list_ptr->next->data == data_to_remove) {
+				node* nodeToRemove = list_ptr->next;
+				list_ptr->next = nodeToRemove->next;
+				delete nodeToRemove;
+				return 1;
+			}
+			// Case 5) The node to remove is in the middle somewhere:
+			node* curr = list_ptr->next; 
+			while(curr != list_ptr) { // Check if we reach the end of the list (circled back to list_ptr)
+				if (curr->next->data == data_to_remove) {
+					// Delete the node
+					node* nodeToRemove = curr->next;
+					curr->next = nodeToRemove->next; // Set current to the node after the one we are going to delete
+					delete nodeToRemove;
+					return 1;
+				}
+				curr = curr->next;
+			}
+			return 1;
+		}
+			
+		node* removeNode(node* &curr, int data_to_remove) {
+			if (curr == nullptr) return nullptr; // No list, nothing to remove 
+			if(curr ->data == data_to_remove) { // We found the the node to remove
+				node* nextLink = curr->next; // Hold the link to the next node
+				delete curr; // Remove the node	
+				return nextLink; // Return the node after the one that was deleted to keep the list connected
+			}
+			return removeNode(curr->next, data_to_remove);
+		}
+
 		int printList(node* currentNode) {
 			std::cout << currentNode->data << " "; // Print the data
 			if (currentNode == this->list_ptr) return 0; // Circled back to the head
