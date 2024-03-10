@@ -12,7 +12,8 @@ that I plan to move through in the next month:
 
 - [X] linear linked lists
 - [X] doubly linked lists
-- [ ] circular linked lists
+- [X] circular linked lists
+- [X] Hash Maps
 - [ ] binary search trees
 - [ ] \(more coming soon)
 
