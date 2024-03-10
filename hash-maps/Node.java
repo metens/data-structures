@@ -1,3 +1,6 @@
+// This Node class holds two String variables: key and value. The key maps to the value.
+// The class also contains two constructors and methods for setting/getting the link to the
+// next node, as well as a setter for the data.
 public class Node {
 	// Hash maps have "key": "value" mappings
 	public String key;
@@ -12,6 +15,12 @@ public class Node {
 		this.key = key;
 		this.value = value;
 		this.next = null; 
+	}
+
+	// Setter for the Node data:
+	public void setData(String key, String value) {
+		this.key = key;
+		this.value = value;
 	}
 
 	// Setter and getter methods for the next Node link:

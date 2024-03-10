@@ -1,3 +1,7 @@
+// This LinkedList class controlls the Node class and its data.
+// The LinkedList class has a head variable that's initialized to null
+// in the constructor and has an 'addToTail()' method that
+// adds the key/value pair mappings for the hashmap class.
 public class LinkedList {
 	public Node head; // Head pointer to a Node object
 
