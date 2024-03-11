@@ -11,16 +11,17 @@ int main() {
 
 	// Add nodes of random integer data:
 	myTree.addNode(5);
-	myTree.addNode(8);
 	myTree.addNode(2);
 	myTree.addNode(15);
-	myTree.addNode(6);
-	myTree.addNode(1);
 	myTree.addNode(10);
 	myTree.addNode(7);
 
 	// Print the integer data in order from smallest to largest:
 	myTree.print();
+
+	// Find the sum of the tree:
+	int sum = myTree.sumData();
+	cout << "Sum: " << sum << endl;
 
 	return 0;
 }

@@ -34,6 +34,18 @@ class tree {
 			print(currentNode->getRightNode()); // go right
 		}
 
+		// CurrentNode traverses all the way left, then add the smallest node's value.
+		// Then it goes to the right node and repeates. It only increments the sum
+		// when we reached a dead end at the left pointer.
+		int sumData(node* currentNode, int &sum) { // Sums all the data in the tree
+			if (!currentNode) { // If we reach the end of a path, return 
+				return sum; // Nothing to add
+			}
+			sumData(currentNode->getLeftNode(), sum); // Go left until we reach the end
+			sum += currentNode->getData(); // Increment sum by the current smallest node's value
+			return sumData(currentNode->getRightNode(), sum); // Return the incremented sum and go right
+		}
+
 	public:
 		tree() : root(nullptr) {}
 
@@ -44,5 +56,10 @@ class tree {
 
 		void print() { // Prints all the nodes in order from smallest data to largest data
 			print(this->root);
+		}
+
+		int sumData() { // Sums all the data in the tree
+			int sum = 0;
+			return sumData(this->root, sum);
 		}
 };
