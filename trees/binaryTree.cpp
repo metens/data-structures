@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 class node {
 	public: 
@@ -65,7 +66,7 @@ class tree {
 			removeNode(root, data);
 		}
 
-		void print() { // prints tree using depth-first-traversal
+		void print() { // prints tree using depth-first-traversal (i.e. in-order traversal)
 			print(root);
 		}
 		void print(node* current) { 
@@ -73,6 +74,42 @@ class tree {
 			print(current->left); // traverse all the way left
 			std::cout << current->data << " "; // print data
 			print(current->right); // then repeat going right 
+		}
+
+		void printPreOrder() { // pre-order traversal
+			printPreOrder(root);	
+		}
+		void printPreOrder(node* current) {
+			if (!current) return;
+			std::cout << current->data << " "; // visit the root first
+			printPreOrder(current->left); // then left
+			printPreOrder(current->right); // then right
+		}
+
+		void printPostOrder() { // post-order traversal
+			printPostOrder(root);
+		}
+		void printPostOrder(node* current) {
+			if (!current) return;
+			printPostOrder(current->left);
+			printPostOrder(current->right);
+			std::cout << current->data << " ";
+		}
+
+		void breadthFirstPrint() {
+			if (!root) return; // no tree
+			std::queue<node*> q; // initialize a queue
+			q.push(root); // push the root node into the queue 
+
+			node* current = nullptr;
+			while (!q.empty()) { // print the front of the queue until its empty and wev'e traversed the tree:
+				current = q.front(); // current is the front of the queue
+				std::cout << current->data << " ";
+				q.pop(); // remove the front node
+				// check if the left & right child exists before pushing them into the queue
+				if (current->left) q.push(current->left); 
+				if (current->right) q.push(current->right);
+			}
 		}
 };
 
@@ -94,19 +131,30 @@ int main() {
 		T.addNode(data[i]); 
 	}
 
+	std::cout << "Depth-first (in-order) traversal: ";
 	T.print(); std::cout << std::endl;
 
-	T.removeNode(3);
-	T.print(); std::cout << std::endl;
+	std::cout << "Breadth-first traversal: ";
+	T.breadthFirstPrint(); std::cout << std::endl;
 
-	T.removeNode(11);
-	T.print(); std::cout << std::endl;
+	std::cout << "Pre-order traversal: ";
+	T.printPreOrder(); std::cout << std::endl;
 
-	T.removeNode(6);
-	T.print(); std::cout << std::endl;
+	std::cout << "Post-order traversal: ";
+	T.printPostOrder(); std::cout << std::endl; 
 
-	T.removeNode(10); // remove the root
-	T.print(); std::cout << std::endl;
+	/*
+	   T.removeNode(3);
+	   T.print(); std::cout << std::endl;
 
+	   T.removeNode(11);
+	   T.print(); std::cout << std::endl;
+
+	   T.removeNode(6);
+	   T.print(); std::cout << std::endl;
+
+	   T.removeNode(10); // remove the root
+	   T.print(); std::cout << std::endl;
+	   */
 	return 0;
 }
