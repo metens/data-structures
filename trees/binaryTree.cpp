@@ -111,10 +111,63 @@ class tree {
 				if (current->right) q.push(current->right);
 			}
 		}
+
+
+};
+
+class fullTree: public tree {
+	public:
+		std::queue<node*>* q; // q is a pointer to a queue that stores node pointer
+		fullTree() {
+			q = new std::queue<node*>;
+		}
+		void add(int data) {
+			/*    1) Create a queue to store nodes.
+			      2) Create a root node and enqueue it into the queue.
+			      3) Repeat the following steps while the queue is not empty:
+			      	a. Dequeue a node from the queue.
+			      	b. Create two child nodes for the dequeued node (left and right).
+			      	c. Enqueue the left child into the queue.
+			      	d. Enqueue the right child into the queue.
+			      	e. If the queue is not empty, repeat steps a-d until each level is filled.
+			 */
+			if (!root) { // no tree yet: complete step (2) of algorithm
+				root = new node(data);
+				q->push(root);
+				return;
+			} // step (3) a thru e:
+			node* current = q->front(); // dequeue the front node
+			// remove the current node from the queue if both of its children are not null
+			if (current->left && current->right) q->pop(); 
+			current = q->front(); // dequeue the front node
+			node* newNode = new node(data); // creating a child with data from the current node
+			q->push(newNode);
+
+			// check the left node of current
+			if (!current->left) current->left = newNode; // if null, add newNode to the left
+			else if (!current->right) current->right = newNode; // if left is not null, add it right 
+		}
 };
 
 int main() {
 	tree T;
+
+	//
+	fullTree fT;
+	fT.add(2);
+	fT.add(6);
+	fT.add(1);
+	fT.add(3);
+	fT.add(7);
+	fT.add(8);
+
+	std::cout << "Full tree (In-order Traversal print): ";
+	fT.print();
+	std::cout << std::endl;
+	std::cout << "Full tree (Breadth-First Traversal print): ";
+	fT.breadthFirstPrint();
+	std::cout << std::endl;
+	//
 
 	int data[] = {5, 8, 3, 11, 12, 7, 6, '\0'};
 	int length = 0;
@@ -122,7 +175,7 @@ int main() {
 		length++;
 	}
 
-	std::cout << "Length of data array: " << length << std::endl;
+	std::cout << "\nLength of data array: " << length << std::endl;
 
 	int root = 10;
 	T.addNode(root);
