@@ -7,14 +7,16 @@ doubly linked lists, circular linked lists, binary trees,
 arrays of linked lists, linked lists of arrays**, and much more.
 
 ## Tasks
-So far I am starting at linear linked lists. Here is a task list
+So far I am starting with linear linked lists. Here is a task list
 that I plan to move through in the next month:
 
 - [X] linear linked lists
 - [X] doubly linked lists
 - [X] circular linked lists
 - [X] Hash Maps
-- [ ] binary search trees
+- [X] binary search trees
+- [X] graphs
+- [ ] deletion methods for each
 - [ ] \(more coming soon)
 
 
